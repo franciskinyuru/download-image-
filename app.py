@@ -5,14 +5,14 @@ import shutil
 app = Flask(__name__)
 
 
-@app.route('/download', methods=['POST','GET'])
+@app.route('/download', methods=['POST', 'GET'])
 def index():
     if request.method == "POST":
         try:
             data = request.form
             image_url = data['image']
-            file_name =image_url.split('/')[-1]
-            response = requests.get(image_url,allow_redirects=True, stream=True)
+            file_name = image_url.split('/')[-1]
+            response = requests.get(image_url, allow_redirects=True, stream=True)
             if response.status_code == 200:
                 with open(file_name, 'wb') as f:
                     f.write(response.content)
